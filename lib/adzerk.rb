@@ -1,5 +1,7 @@
 require 'json'
 require 'net/http'
+require 'uri'
+require 'mime/types'
 require 'active_support/inflector'
 require 'adzerk/util'
 require 'adzerk/errors'
