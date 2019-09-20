@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Adzerk
   class Reporting
     include Adzerk::Util
@@ -33,7 +35,7 @@ module Adzerk
 
       # Try to get the report indefinitely or up until the timeout, with
       # exponential backoff.
-      time_to_stop  = Time.now + (timeout / 1000.0) unless timeout.nil?
+      time_to_stop = Time.now + (timeout / 1000.0) unless timeout.nil?
       retries = 0
 
       while timeout.nil? or Time.now < time_to_stop

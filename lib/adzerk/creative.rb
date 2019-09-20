@@ -1,4 +1,4 @@
-require "rest_client"
+# frozen_string_literal: true
 
 module Adzerk
   class Creative < ApiEndpoint

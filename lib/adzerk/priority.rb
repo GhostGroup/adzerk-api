@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Adzerk
   class Priority < ApiEndpoint
     def create(opts={})

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Adzerk
   class CreativeMap
-
     include Adzerk::Util
 
     def initialize(args={})

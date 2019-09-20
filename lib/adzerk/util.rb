@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module Adzerk
   module Util
     extend self 
 
     def camelize_data(data)
       return data unless data.respond_to?(:reduce)
-      data.reduce({}) do |acc, (sym, val)|
+
+      data.each_with_object({}) do |acc, (sym, val)|
         sym = sym.to_s.camelize if sym.class == Symbol
         acc[sym] = case val
                      when Hash then camelize_data(val)
@@ -16,12 +19,12 @@ module Adzerk
     end
 
     def uncamelize_data(data)
-      # stop condition for the recursion
       return data unless data.respond_to?(:reduce)
-      data.reduce({}) do |acc, (key, val)|
+
+      data.each_with_object({}) do |acc, (key, val)|
         acc[key.underscore.to_sym] = case val
                                        when Hash then uncamelize_data(val)
-                                       when Array then val.map {|elem| uncamelize_data(elem) }
+                                       when Array then val.map { |elem| uncamelize_data(elem) }
                                        else val
                                      end
         acc

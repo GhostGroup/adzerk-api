@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Adzerk
   class Client
-
     include Adzerk::Util
 
     attr_reader :sites, :ad_types, :zones, :campaigns, :channels, :priorities,
@@ -9,8 +10,8 @@ module Adzerk
                 :logins, :geotargetings, :sitezonetargetings, :categories
 
     DEFAULTS = {
-      :host => ENV["ADZERK_API_HOST"] || 'https://api.adzerk.net/v1/',
-      :header => 'X-Adzerk-ApiKey'
+      host: ENV['ADZERK_API_HOST'] || 'https://api.adzerk.net/v1/',
+      header: 'X-Adzerk-ApiKey'
     }
 
     def initialize(key, opts = {})
@@ -65,7 +66,7 @@ module Adzerk
                                  {:creative => camelize_data(data).to_json},
                                   :X_Adzerk_ApiKey => @api_key,
                                   :accept => :json)
-      response = upload_creative(JSON.parse(response)["Id"], image_path) unless image_path.empty?
+      response = upload_creative(JSON.parse(response)['Id'], image_path) unless image_path.empty?
       response
     end
 
@@ -75,7 +76,7 @@ module Adzerk
       url += '?sizeOverride=true' if size_override
       RestClient.post(url,
       {:image => image},
-      "X-Adzerk-ApiKey" => @api_key,
+      'X-Adzerk-ApiKey' => @api_key,
       :accept => :mime)
     end
 
@@ -83,9 +84,9 @@ module Adzerk
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == 'https'
       response = http.request(request)
-      if response.kind_of? Net::HTTPClientError
+      if response.is_a Net::HTTPClientError
         error_response = JSON.parse(response.body)
-        msg = error_response["message"] || error_response["Error"]
+        msg = error_response['message'] || error_response['Error']
         raise Adzerk::ApiError.new(msg)
       end
       response

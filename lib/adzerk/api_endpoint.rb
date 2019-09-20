@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Adzerk
   class ApiEndpoint
-
     include Adzerk::Util
 
     attr_reader :client, :endpoint, :datakey, :subendpoint

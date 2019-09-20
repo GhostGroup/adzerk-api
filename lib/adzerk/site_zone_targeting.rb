@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Adzerk
   class SiteZoneTargeting
-
     include Adzerk::Util
 
     def initialize(args={})

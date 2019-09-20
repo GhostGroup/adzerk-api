@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Adzerk
   class Advertiser < ApiEndpoint
     def search(advertiser_name)
